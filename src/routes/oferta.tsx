@@ -500,10 +500,6 @@ function OfferPage() {
   const [color, setColor] = useState<"white" | "beige" | "other">("white");
   const [colorText, setColorText] = useState("");
   const [colorCommitted, setColorCommitted] = useState(false);
-  // Grafika podglądu: jedna osoba + jednokolorowa + bez podstawki (rozmiar i opakowanie bez znaczenia).
-  const singlePersonPreview =
-    subjects.length === 1 && subjects[0] === "person" && personCount === 1
-    && finish === "single" && base === "none";
   // Delay the "no color chosen" reset so clicking another color swatch cancels it
   // instead of flashing back to white before the swatch's own click handler runs.
   const colorResetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
