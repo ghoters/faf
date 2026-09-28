@@ -1013,6 +1013,8 @@ function OfferPage() {
           </aside>
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
