@@ -31,7 +31,6 @@ import {
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/logo.png.asset.json";
 import podgladFigurki from "@/assets/podglad-figurki-para-pies.jpg.asset.json";
-import podgladFigurkiJednaOsoba from "@/assets/1osoba-jednokolorowa.jpg.asset.json";
 import osoba1Asset from "@/assets/osoba1.jpg.asset.json";
 import piesAsset from "@/assets/pies-nowy.jpg.asset.json";
 import znakAsset from "@/assets/znak2.jpg.asset.json";
@@ -501,10 +500,6 @@ function OfferPage() {
   const [color, setColor] = useState<"white" | "beige" | "other">("white");
   const [colorText, setColorText] = useState("");
   const [colorCommitted, setColorCommitted] = useState(false);
-  // Grafika podglądu: jedna osoba + jednokolorowa + bez podstawki (rozmiar i opakowanie bez znaczenia).
-  const singlePersonPreview =
-    subjects.length === 1 && subjects[0] === "person" && personCount === 1
-    && finish === "single" && base === "none";
   // Delay the "no color chosen" reset so clicking another color swatch cancels it
   // instead of flashing back to white before the swatch's own click handler runs.
   const colorResetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -957,8 +952,8 @@ function OfferPage() {
           <aside className="rounded-md border border-border bg-card p-5 xl:sticky xl:top-[113px] xl:max-h-[calc(100vh-129px)] xl:overflow-y-auto">
             <div className="relative aspect-[1.1157] overflow-hidden rounded-t-md border border-border border-b-0 bg-muted" aria-label="Podgląd figurki">
               <img
-                src={(singlePersonPreview ? podgladFigurkiJednaOsoba : podgladFigurki).url}
-                alt={singlePersonPreview ? "Przykładowa figurka 3D — pojedyncza osoba" : "Przykładowa figurka 3D — para"}
+                src={podgladFigurki.url}
+                alt="Przykładowa figurka 3D"
                 className="size-full object-cover"
               />
               <div className="absolute inset-x-0 top-0 flex items-center justify-between gap-2 bg-muted/40 px-3 py-[3px] backdrop-blur-sm">
