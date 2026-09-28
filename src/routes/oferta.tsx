@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/logo.png.asset.json";
-import podgladFigurki from "@/assets/2osoba-jednokolorowa2-2.jpg.asset.json";
+import podgladFigurki from "@/assets/podglad-figurki-para-pies.jpg.asset.json";
 import podgladFigurkiJednaOsoba from "@/assets/1osoba-jednokolorowa.jpg.asset.json";
 import osoba1Asset from "@/assets/osoba1.jpg.asset.json";
 import piesAsset from "@/assets/pies-nowy.jpg.asset.json";
