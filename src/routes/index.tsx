@@ -24,6 +24,7 @@ import {
   Youtube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/SiteFooter";
 import banerAsset from "@/assets/baner.jpg.asset.json";
 import heroBgAsset from "@/assets/baner-ver2.jpg.asset.json";
 import logoAsset from "@/assets/logo.png.asset.json";
