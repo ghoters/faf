@@ -19,7 +19,7 @@ export function SiteFooter() {
           <Link to="/oferta">Oferta</Link>
           <a href="#realizacje">Galeria</a>
           <a href="#proces">Jak to działa?</a>
-          <Link to="/oferta">Cennik</a>
+          <Link to="/oferta">Cennik</Link>
           <a href="#">FAQ</a>
         </nav>
         <div className="flex flex-col gap-3 md:justify-self-end">
