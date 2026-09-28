@@ -14,7 +14,7 @@ export function SiteFooter() {
           <Logo/>
           <p className="-mt-[5.75px] ml-9 text-[10px] leading-none text-muted-foreground">Personalizowane figurki 3D na zamówienie</p>
         </div>
-        <nav className="flex flex-wrap gap-5 text-[10px] font-semibold md:pt-4">
+        <nav className="flex flex-wrap gap-5 text-[10px] font-semibold md:-mt-1">
           <a href="#">Strona główna</a>
           <Link to="/oferta">Oferta</Link>
           <a href="#realizacje">Galeria</a>
