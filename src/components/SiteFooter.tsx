@@ -8,7 +8,7 @@ function Logo() {
 
 export function SiteFooter() {
   return (
-    <footer id="kontakt" className="bg-card py-8">
+    <footer id="kontakt" className="bg-card pt-[7px] pb-8">
       <div className="section-shell grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
         <div className="flex flex-col items-start">
           <Logo/>
