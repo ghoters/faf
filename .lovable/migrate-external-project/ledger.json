@@ -1,0 +1,11 @@
+{
+  "capabilities": [
+    {"capability":"code","source":"GitHub: ghoters/frontside-clone","outcome":"migrate","status":"verified","next_action":"None."},
+    {"capability":"routes","source":"/ and /oferta","outcome":"migrate","status":"verified","next_action":"None."},
+    {"capability":"assets","source":"31 Lovable asset pointers","outcome":"migrate","status":"verified","next_action":"None."},
+    {"capability":"database","source":"none detected","outcome":"not_applicable","status":"verified","next_action":"None."},
+    {"capability":"auth","source":"none detected","outcome":"not_applicable","status":"verified","next_action":"None."},
+    {"capability":"external providers","source":"Google Fonts only","outcome":"preserve","status":"verified","next_action":"None."},
+    {"capability":"verification","source":"desktop/tablet/mobile preview","outcome":"verify","status":"verified","next_action":"None."}
+  ]
+}
