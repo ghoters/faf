@@ -1,17 +1,44 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Instagram, Youtube } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 function Logo() {
-  return <a href="#" className="flex shrink-0 items-center"><img src={logoAsset.url} alt="prezent3d.com" className="h-9 w-auto" /></a>;
+  return (
+    <a href="#" className="flex w-fit shrink-0 flex-col">
+      <img src={logoAsset.url} alt="prezent3d.com" className="h-11 w-auto" />
+      <p className="mt-1.5 ml-9 text-[13px] leading-none text-muted-foreground">Personalizowane figurki 3D na zamówienie</p>
+    </a>
+  );
 }
 
 export function SiteFooter() {
   return (
-    <footer id="kontakt" className="bg-card py-8">
-      <div className="section-shell grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-start"><div className="flex flex-col items-start"><Logo/><p className="-mt-[5.75px] ml-9 text-[10px] leading-none text-muted-foreground">Personalizowane figurki 3D na zamówienie</p></div><nav className="flex flex-wrap gap-5 text-[10px] font-semibold"><a href="#">Strona główna</a><Link to="/oferta">Oferta</Link><a href="#realizacje">Galeria</a><a href="#proces">Jak to działa?</a><Link to="/oferta">Cennik</Link><a href="#">FAQ</a></nav><div className="md:justify-self-end"><p className="text-[10px]">Zapisz się do newslettera.</p><div className="mt-2 flex"><input aria-label="Adres e-mail" className="h-9 min-w-0 rounded-l-md border border-border bg-background px-3 text-xs outline-none" placeholder="Twój adres e-mail"/><Button size="icon" className="rounded-l-none"><ArrowRight/></Button></div><div className="mt-4 flex gap-3 text-muted-foreground"><Instagram className="size-4"/><Youtube className="size-4"/></div></div></div>
-      <div className="section-shell mt-7 flex flex-wrap justify-between gap-4 border-t border-border pt-5 text-[9px] text-muted-foreground"><span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span><span>Polityka prywatności &nbsp;&nbsp;&nbsp; Regulamin</span></div>
+    <footer id="kontakt" className="bg-card py-10">
+      <div className="section-shell flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-6">
+        <Logo />
+        <nav className="flex flex-wrap gap-x-7 gap-y-2 text-[15px] font-semibold text-foreground" aria-label="Nawigacja w stopce">
+          <a href="#" className="transition-colors hover:text-primary/70">Strona główna</a>
+          <Link to="/oferta" className="transition-colors hover:text-primary/70">Oferta</Link>
+          <a href="/#realizacje" className="transition-colors hover:text-primary/70">Galeria</a>
+          <a href="/#proces" className="transition-colors hover:text-primary/70">Jak to działa?</a>
+          <Link to="/oferta" className="transition-colors hover:text-primary/70">Cennik</Link>
+          <a href="#" className="transition-colors hover:text-primary/70">FAQ</a>
+        </nav>
+        <div className="flex flex-col gap-5 md:justify-self-end">
+          <a href="mailto:prezent3d@gmail.com" className="flex w-fit items-center gap-3 text-[16px] font-bold text-foreground transition-colors hover:text-primary">
+            <Mail className="size-[22px] text-primary" aria-hidden="true" />
+            prezent3d@gmail.com
+          </a>
+          <p className="text-[16px] font-bold text-foreground">prezent3D.com</p>
+        </div>
+      </div>
+      <div className="section-shell mt-9 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground">
+        <span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span>
+        <span className="flex gap-6">
+          <a href="#" className="transition-colors hover:text-foreground">Polityka prywatności</a>
+          <a href="#" className="transition-colors hover:text-foreground">Regulamin</a>
+        </span>
+      </div>
     </footer>
   );
 }
