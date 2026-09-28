@@ -6,7 +6,7 @@ function Logo() {
   return (
     <a href="#" className="flex w-fit shrink-0 flex-col">
       <img src={logoAsset.url} alt="prezent3d.com" className="h-11 w-auto" />
-      <p className="mt-1.5 ml-9 text-[13px] leading-none text-muted-foreground">Personalizowane figurki 3D na zamówienie</p>
+      <p className="mt-1.5 ml-[67px] text-[13px] leading-none text-muted-foreground">Personalizowane figurki 3D na zamówienie</p>
     </a>
   );
 }
