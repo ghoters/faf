@@ -33,7 +33,7 @@ export function SiteFooter() {
           </a>
         </div>
       </div>
-      <div className="section-shell mt-7 flex flex-wrap justify-between gap-4 border-t border-border pt-5 text-[9px] text-muted-foreground"><span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span><span>Polityka prywatności &nbsp;&nbsp;&nbsp; Regulamin</span></div>
+      <div className="section-shell mt-7 flex flex-wrap justify-between gap-4 border-t border-border pt-[7px] text-[9px] text-muted-foreground"><span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span><span>Polityka prywatności &nbsp;&nbsp;&nbsp; Regulamin</span></div>
     </footer>
   );
 }
