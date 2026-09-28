@@ -29,6 +29,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/SiteFooter";
 import logoAsset from "@/assets/logo.png.asset.json";
 import podgladFigurki from "@/assets/podglad-figurki-para-pies.jpg.asset.json";
 import osoba1Asset from "@/assets/osoba1.jpg.asset.json";
@@ -1013,6 +1014,8 @@ function OfferPage() {
           </aside>
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
