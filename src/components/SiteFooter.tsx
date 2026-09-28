@@ -8,7 +8,7 @@ function Logo() {
 
 export function SiteFooter() {
   return (
-    <footer id="kontakt" className="bg-card py-8">
+    <footer id="kontakt" className="bg-card pt-[17.5px] pb-8">
       <div className="section-shell grid gap-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
         <div className="flex flex-col items-start">
           <Logo/>
@@ -33,7 +33,7 @@ export function SiteFooter() {
           </a>
         </div>
       </div>
-      <div className="section-shell mt-7 flex flex-wrap justify-between gap-4 border-t border-border pt-[7px] text-[9px] text-muted-foreground"><span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span><span>Polityka prywatności &nbsp;&nbsp;&nbsp; Regulamin</span></div>
+      <div className="section-shell mt-[17.5px] flex flex-wrap justify-between gap-4 border-t border-border pt-[7px] text-[9px] text-muted-foreground"><span>© 2026 prezent3d.pl. Wszelkie prawa zastrzeżone.</span><span>Polityka prywatności &nbsp;&nbsp;&nbsp; Regulamin</span></div>
     </footer>
   );
 }
