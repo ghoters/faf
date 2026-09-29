@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type ComponentType } from "react";
 import {
   ArrowRight,
@@ -13,14 +13,11 @@ import {
   Info,
 
   Lightbulb,
-  Menu,
   Minus,
   Package,
   Palette,
   PawPrint,
   Plus,
-  Search,
-  ShoppingCart,
   Sparkles,
   Star,
   UploadCloud,
@@ -30,7 +27,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/SiteFooter";
-import logoAsset from "@/assets/logo.png.asset.json";
+import { SiteHeader } from "@/components/SiteHeader";
+import { readFigurineConfig, saveFigurineConfig } from "@/lib/figurine-config";
 import podgladFigurki from "@/assets/podglad-figurki-para-pies.jpg.asset.json";
 import osoba1Asset from "@/assets/osoba1.jpg.asset.json";
 import piesAsset from "@/assets/pies-nowy.jpg.asset.json";
@@ -98,42 +96,6 @@ const packages: { id: string; title: string; text: string; price: number; imageS
   { id: "standard", title: "Standardowe", text: "Wliczone w cenę", price: 0, imageSide: "left", image: opakowanieStandardoweAsset.url, imageFull: true },
   { id: "gift", title: "Pudełko prezentowe", text: "Eleganckie opakowanie gotowe do wręczenia.", price: 40, imageSide: "left", recommended: true, image: opakowaniePrezentoweAsset.url, imageFull: true },
 ];
-
-const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";
-
-function Logo() {
-  return (
-    <Link to="/" className="flex shrink-0 items-center" aria-label="prezent3d.com — strona główna">
-      <img src={logoAsset.url} alt="prezent3d.com" className="h-9 w-auto" />
-    </Link>
-  );
-}
-
-function Header() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-card">
-      <div className="section-shell grid h-[68px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-5">
-        <Logo />
-        <nav className="hidden items-center justify-center gap-6 text-[12px] font-semibold text-foreground lg:flex" aria-label="Główna nawigacja">
-          <Link to="/" className={navLinkHover}>Strona główna</Link>
-          <Link to="/oferta" className="border-b-2 border-primary py-6 text-primary">Oferta⌄</Link>
-          <Link to="/" hash="realizacje" className={navLinkHover}>Galeria</Link>
-          <Link to="/" hash="proces" className={navLinkHover}>Jak to działa?</Link>
-          <a href="#podsumowanie" className={navLinkHover}>Cennik</a>
-          <a href="#" className={navLinkHover}>FAQ</a>
-          <Link to="/" hash="kontakt" className={navLinkHover}>Kontakt</Link>
-        </nav>
-        <div className="hidden items-center gap-4 lg:flex">
-          <Search className="size-4" aria-hidden="true" />
-          <UserRound className="size-4" aria-hidden="true" />
-          <ShoppingCart className="size-4" aria-hidden="true" />
-          <Button variant="hero" size="default">Stwórz swoją figurkę <ArrowRight /></Button>
-        </div>
-        <Menu className="size-6 lg:hidden" aria-label="Otwórz menu" />
-      </div>
-    </header>
-  );
-}
 
 function StepHeading({ number, title, subtitle, active }: { number: number; title: string; subtitle: string; active: boolean }) {
   return (
@@ -486,6 +448,7 @@ function HelpRail() {
 }
 
 function OfferPage() {
+  const navigate = useNavigate();
   const [subjects, setSubjects] = useState<string[]>(["person"]);
   const [personCount, setPersonCount] = useState(1);
   const [animalCount, setAnimalCount] = useState(0);
@@ -501,6 +464,7 @@ function OfferPage() {
   const [color, setColor] = useState<"white" | "beige" | "other">("white");
   const [colorText, setColorText] = useState("");
   const [colorCommitted, setColorCommitted] = useState(false);
+  const restoredConfig = useRef(false);
   // Delay the "no color chosen" reset so clicking another color swatch cancels it
   // instead of flashing back to white before the swatch's own click handler runs.
   const colorResetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -590,6 +554,17 @@ function OfferPage() {
   const stepBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!restoredConfig.current) {
+      restoredConfig.current = true;
+      const stored = readFigurineConfig();
+      if (stored) {
+        setSubjects(stored.subjects); setPersonCount(stored.personCount); setAnimalCount(stored.animalCount);
+        setCustomText(stored.customText); setCustomCommitted(stored.customCommitted); setSize(stored.size);
+        setFinish(stored.finish); setBase(stored.base); setPack(stored.pack); setPhotoCount(stored.photoCount);
+        setColor(stored.color); setColorText(stored.colorText); setColorCommitted(stored.colorCommitted);
+        setGraverText(stored.graverText); setGraverCommitted(stored.graverCommitted);
+      }
+    }
     const onScroll = () => {
       const el = stepBarRef.current;
       if (!el) return;
@@ -606,7 +581,7 @@ function OfferPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <Header />
+      <SiteHeader active="offer" />
       <section id="konfigurator" className="section-shell-xwide py-7 lg:py-9">
         <p className="text-xs font-extrabold uppercase tracking-wide text-primary">Konfigurator</p>
         <h1 className="mt-2 text-[2rem] font-extrabold leading-tight lg:text-[2.7rem]">Stwórz swoją figurkę 3D</h1>
@@ -1017,7 +992,15 @@ function OfferPage() {
               </div>
             </div>
             <p className="mt-3 flex items-center gap-2 text-xs font-semibold text-primary"><Package className="size-4" /> Darmowa wysyłka od 299 zł</p>
-            <Button type="button" className="mt-3 h-12 w-full text-sm">Przejdź dalej <ArrowRight /></Button>
+            <Button
+              type="button"
+              disabled={!activeSteps.every(Boolean)}
+              className="mt-3 h-12 w-full text-sm"
+              onClick={() => {
+                saveFigurineConfig({ subjects, personCount, animalCount, customText, customCommitted, size, finish, base, pack, photoCount, color, colorText, colorCommitted, graverText, graverCommitted });
+                void navigate({ to: "/zamowienie" });
+              }}
+            >Przejdź dalej <ArrowRight /></Button>
           </aside>
         </div>
       </section>

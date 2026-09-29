@@ -14,10 +14,7 @@ import {
   Hexagon,
   Image as ImageIcon,
   Instagram,
-  Menu,
-  Search,
   ShieldCheck,
-  ShoppingCart,
   Star,
   UserRound,
   UsersRound,
@@ -25,9 +22,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import banerAsset from "@/assets/baner.jpg.asset.json";
 import heroBgAsset from "@/assets/baner-ver2.jpg.asset.json";
-import logoAsset from "@/assets/logo.png.asset.json";
 import realizacjaZdjecieAsset from "@/assets/realizacja-zdjecie.jpg.asset.json";
 import model3dAsset from "@/assets/model-3d.jpg.asset.json";
 import reczneMalowanieAsset from "@/assets/reczne-malowanie.jpg.asset.json";
@@ -86,10 +83,6 @@ const heroHighlights = [
   { icon: Paintbrush, line1: "Ręczne", line2: "malowanie" },
 ];
 
-function Logo() {
-  return <a href="#" className="flex shrink-0 items-center"><img src={logoAsset.url} alt="prezent3d.com" className="h-9 w-auto" /></a>;
-}
-
 function Placeholder({ className = "", label = "Miejsce na zdjęcie" }: { className?: string; label?: string }) {
   return <div className={`image-placeholder grid place-items-center overflow-hidden ${className}`}><ImageIcon className="size-8 text-muted-foreground/45" aria-hidden="true" /><span className="sr-only">{label}</span></div>;
 }
@@ -102,21 +95,10 @@ function SectionDivider() {
   return <div aria-hidden="true" className="h-px w-full bg-border" />;
 }
 
-const navLinkHover = "transition-colors duration-200 hover:text-primary/70 focus-visible:text-primary/70 focus-visible:outline-none";
-
 function Index() {
   return (
     <main className="min-h-screen overflow-x-clip bg-background">
-      <header className="sticky top-0 z-50 border-b border-border/60 bg-card">
-        <div className="section-shell grid h-[68px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-5">
-          <Logo />
-          <nav className="hidden items-center justify-center gap-6 text-[12px] font-semibold text-foreground lg:flex" aria-label="Główna nawigacja">
-            <a className="border-b-2 border-primary py-6 text-primary" href="#">Strona główna</a><Link to="/oferta" className={navLinkHover}>Oferta⌄</Link><a href="#realizacje" className={navLinkHover}>Galeria</a><a href="#proces" className={navLinkHover}>Jak to działa?</a><Link to="/oferta" className={navLinkHover}>Cennik</Link><a href="#" className={navLinkHover}>FAQ</a><a href="#kontakt" className={navLinkHover}>Kontakt</a>
-          </nav>
-          <div className="hidden items-center gap-4 lg:flex"><Search className="size-4"/><UserRound className="size-4"/><ShoppingCart className="size-4"/><Button variant="hero" size="default">Stwórz swoją figurkę <ArrowRight /></Button></div>
-          <Menu className="size-6 lg:hidden" />
-        </div>
-      </header>
+      <SiteHeader active="home" />
 
       <section
         className="responsive-hero relative bg-brand-soft bg-cover bg-center bg-no-repeat"

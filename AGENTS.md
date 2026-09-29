@@ -11,4 +11,5 @@
 
 - Preserve the imported `prezent3d.com` frontend at `/` and `/oferta` pixel-for-pixel; the GitHub source is authoritative because this project is a visual recreation.
 - Ripple/"fale" rings use `border ripple-ring` (the `--ripple-ring` token), never `border-primary/50`: `--primary` is outside the sRGB gamut and Chromium paints coloured specks on scale-animated wide-gamut borders.
+- Keep the shared site navigation in `SiteHeader` and pass the active section explicitly, so `/`, `/oferta`, and later checkout pages stay visually aligned.
 

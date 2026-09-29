@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OfertaRouteImport } from './routes/oferta'
+import { Route as ZamowienieRouteImport } from './routes/zamowienie'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const OfertaRoute = OfertaRouteImport.update({
   path: '/oferta',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZamowienieRoute = ZamowienieRouteImport.update({
+  id: '/zamowienie',
+  path: '/zamowienie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/oferta': typeof OfertaRoute
+  '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/oferta': typeof OfertaRoute
+  '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/oferta': typeof OfertaRoute
+  '/zamowienie': typeof ZamowienieRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/oferta'
+  fullPaths: '/' | '/oferta' | '/zamowienie'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/oferta'
-  id: '__root__' | '/' | '/oferta'
+  to: '/' | '/oferta' | '/zamowienie'
+  id: '__root__' | '/' | '/oferta' | '/zamowienie'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   OfertaRoute: typeof OfertaRoute
+  ZamowienieRoute: typeof ZamowienieRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfertaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/zamowienie': {
+      id: '/zamowienie'
+      path: '/zamowienie'
+      fullPath: '/zamowienie'
+      preLoaderRoute: typeof ZamowienieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   OfertaRoute: OfertaRoute,
+  ZamowienieRoute: ZamowienieRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
