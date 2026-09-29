@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Check, CircleCheck, Clock3, Gift, MapPin, Package, Palette, Truck, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { readFigurineConfig } from "@/lib/figurine-config";
+import { readFigurineConfig, type FigurineConfig } from "@/lib/figurine-config";
 import podgladFigurki from "@/assets/podglad-figurki-para-pies.jpg.asset.json";
 
 export const Route = createFileRoute("/zamowienie")({
@@ -31,7 +31,7 @@ const packages = { standard: { label: "Standardowe", price: 0 }, gift: { label: 
 
 type Delivery = "courier" | "parcel";
 
-function Field({ label, required, error, children }: { label: string; required?: boolean; error?: string; children: React.ReactNode }) {
+function Field({ label, required, error, children }: { label: string; required?: boolean; error?: string; children: ReactNode }) {
   return (
     <label className="block text-xs font-semibold">
       {label}{required && <span className="text-primary"> *</span>}
@@ -42,12 +42,20 @@ function Field({ label, required, error, children }: { label: string; required?:
 }
 
 function OrderPage() {
-  const config = useMemo(() => typeof window === "undefined" ? null : readFigurineConfig(), []);
+  const [config, setConfig] = useState<FigurineConfig | null>(null);
+  const [configReady, setConfigReady] = useState(false);
   const [delivery, setDelivery] = useState<Delivery>("courier");
   const [accepted, setAccepted] = useState(false);
   const [newsletter, setNewsletter] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setConfig(readFigurineConfig());
+    setConfigReady(true);
+  }, []);
+
+  if (!configReady) return <main className="min-h-screen bg-background" />;
 
   if (!config) {
     return (
@@ -79,7 +87,7 @@ function OrderPage() {
   const colorLabel = config.color === "white" ? "biały" : config.color === "beige" ? "beżowy" : config.colorText;
   const finishLabel = config.finish === "single" ? `${finish?.label} (${colorLabel})` : finish?.label;
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const required = ["firstName", "lastName", "email", "phone", "street", "postalCode", "city"];
