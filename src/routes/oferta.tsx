@@ -624,9 +624,9 @@ function OfferPage() {
               )}
               {index === progressSteps.length - 1 && (
                 <>
-                  {/* Trailing line after the last step stops exactly at the right edge of the preview visual box (aside padding 20px + border 1px). */}
+                  {/* Trailing line after the last step stops exactly at the right edge of the preview visual box (aside padding 20px + border 1px; spacer 12px + flex gap 8px + mr 1px). */}
                   <span className="ml-px mr-px hidden h-px flex-1 bg-border lg:block" />
-                  <span className="hidden w-[21px] shrink-0 lg:block" />
+                  <span className="hidden w-[12px] shrink-0 lg:block" />
                 </>
               )}
             </div>
