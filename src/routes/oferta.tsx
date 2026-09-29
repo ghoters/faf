@@ -622,6 +622,13 @@ function OfferPage() {
                   className={`ml-px mr-px block h-px flex-1 bg-border ${index === 1 || index === 3 ? "hidden sm:block" : ""} ${index === 2 ? "sm:hidden lg:block" : ""}`}
                 />
               )}
+              {index === progressSteps.length - 1 && (
+                <>
+                  {/* Trailing line after the last step stops exactly at the right edge of the preview visual box (aside padding 20px + border 1px). */}
+                  <span className="ml-px mr-px hidden h-px flex-1 bg-border lg:block" />
+                  <span className="hidden w-[21px] shrink-0 lg:block" />
+                </>
+              )}
             </div>
           ))}
         </div>
