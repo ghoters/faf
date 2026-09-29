@@ -31,7 +31,7 @@ const packages = { standard: { label: "Standardowe", price: 0 }, gift: { label: 
 
 type Delivery = "courier" | "parcel";
 
-function Field({ label, required, error, children }: { label: string; required?: boolean; error?: string; children: ReactNode }) {
+function Field({ label, required, error, children }: { label: string; required?: boolean; error?: string | undefined; children: ReactNode }) {
   return (
     <label className="block text-xs font-semibold">
       {label}{required && <span className="text-primary"> *</span>}
@@ -93,7 +93,7 @@ function OrderPage() {
     const required = ["firstName", "lastName", "email", "phone", "street", "postalCode", "city"];
     const nextErrors: Record<string, string> = {};
     required.forEach((name) => { if (!String(form.get(name) ?? "").trim()) nextErrors[name] = "To pole jest wymagane."; });
-    if (!accepted) nextErrors.accepted = "Zaznacz wymaganą zgodę.";
+    if (!accepted) nextErrors["accepted"] = "Zaznacz wymaganą zgodę.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) setSubmitted(true);
   }
@@ -121,10 +121,10 @@ function OrderPage() {
             <section className="rounded-md border border-border bg-card p-5">
               <h2 className="flex items-center gap-2 text-base font-extrabold"><UsersRound className="size-5 text-primary" /> Dane kontaktowe</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <Field label="Imię" required error={errors.firstName}><Input name="firstName" aria-invalid={Boolean(errors.firstName)} /></Field>
-                <Field label="Nazwisko" required error={errors.lastName}><Input name="lastName" aria-invalid={Boolean(errors.lastName)} /></Field>
-                <Field label="Adres e-mail" required error={errors.email}><Input name="email" type="email" aria-invalid={Boolean(errors.email)} /></Field>
-                <Field label="Numer telefonu" required error={errors.phone}><Input name="phone" type="tel" aria-invalid={Boolean(errors.phone)} /></Field>
+                <Field label="Imię" required error={errors["firstName"]}><Input name="firstName" aria-invalid={Boolean(errors["firstName"])} /></Field>
+                <Field label="Nazwisko" required error={errors["lastName"]}><Input name="lastName" aria-invalid={Boolean(errors["lastName"])} /></Field>
+                <Field label="Adres e-mail" required error={errors["email"]}><Input name="email" type="email" aria-invalid={Boolean(errors["email"])} /></Field>
+                <Field label="Numer telefonu" required error={errors["phone"]}><Input name="phone" type="tel" aria-invalid={Boolean(errors["phone"])} /></Field>
               </div>
             </section>
 
@@ -140,9 +140,9 @@ function OrderPage() {
                 ))}
               </div>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <div className="sm:col-span-2"><Field label="Ulica i numer" required error={errors.street}><Input name="street" aria-invalid={Boolean(errors.street)} /></Field></div>
-                <Field label="Kod pocztowy" required error={errors.postalCode}><Input name="postalCode" placeholder="00-000" aria-invalid={Boolean(errors.postalCode)} /></Field>
-                <Field label="Miejscowość" required error={errors.city}><Input name="city" aria-invalid={Boolean(errors.city)} /></Field>
+                <div className="sm:col-span-2"><Field label="Ulica i numer" required error={errors["street"]}><Input name="street" aria-invalid={Boolean(errors["street"])} /></Field></div>
+                <Field label="Kod pocztowy" required error={errors["postalCode"]}><Input name="postalCode" placeholder="00-000" aria-invalid={Boolean(errors["postalCode"])} /></Field>
+                <Field label="Miejscowość" required error={errors["city"]}><Input name="city" aria-invalid={Boolean(errors["city"])} /></Field>
               </div>
             </section>
 
@@ -153,7 +153,7 @@ function OrderPage() {
 
             <section className="rounded-md border border-border bg-card p-5 text-xs leading-relaxed">
               <label className="flex cursor-pointer items-start gap-3"><Checkbox checked={accepted} onCheckedChange={(value) => setAccepted(value === true)} /><span>Akceptuję Regulamin i Politykę prywatności oraz wyrażam zgodę na realizację personalizowanego zamówienia. <strong className="text-primary">*</strong></span></label>
-              {errors.accepted && <p className="ml-7 mt-1 text-[10px] text-destructive">{errors.accepted}</p>}
+              {errors["accepted"] && <p className="ml-7 mt-1 text-[10px] text-destructive">{errors["accepted"]}</p>}
               <label className="mt-4 flex cursor-pointer items-start gap-3"><Checkbox checked={newsletter} onCheckedChange={(value) => setNewsletter(value === true)} /><span>Chcę otrzymywać informacje o nowościach i promocjach.</span></label>
             </section>
           </div>
